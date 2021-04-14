@@ -1,6 +1,7 @@
 import java.util.Date;
 
 public class Reserva {
+
     private Libro libro;
     private Date fecha;
 
@@ -24,7 +25,9 @@ public class Reserva {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
-    public Reserva(){}
+
+    public Reserva() {
+    }
 }
 
 

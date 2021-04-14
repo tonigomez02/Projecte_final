@@ -8,6 +8,7 @@ public class Libro {
     private Integer nº_copias = 1;
     private Integer nº_copias_disponibles = 1;
     private Integer contador;
+    Biblioteca biblioteca = new Biblioteca();
 
     public Integer getContador() {
         return contador;
@@ -82,7 +83,7 @@ public class Libro {
         this.nº_copias_disponibles = nº_copias_disponibles;
     }
 
-    public static void añadirLibro() {
+    public void añadirLibro() {
         Libro libro = new Libro();
         Scanner pedir_libros = new Scanner(System.in);
         System.out.println("Escriba el titulo del libro ");
@@ -92,15 +93,63 @@ public class Libro {
         Integer ISBN = Integer.parseInt(pedir_libros.nextLine());
         libro.setISBN(ISBN);
         System.out.println("Que autor tiene el libro");
-        String autor=pedir_libros.nextLine();
+        String autor = pedir_libros.nextLine();
         libro.setAutor(autor);
         System.out.println("A que editorial pertenece");
-        String editorial= pedir_libros.nextLine();
+        String editorial = pedir_libros.nextLine();
         libro.setEditorial(editorial);
+        biblioteca.añadirLibro(libro);
 
     }
-public static void eliminarLibro(){
 
-}
+    public void eliminarLibro() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Escriba un ISBN para buscar el libro");
+        String isbn = scanner.nextLine();
+        for (int i = 0; i < biblioteca.getLista_libros().size(); i++) {
+            if (biblioteca.getLista_libros().get(i).getISBN().equals(isbn)) {
+
+            } else {
+
+            }
+        }
+
+    }
+
+    public void buscarISBN() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Escriba un ISBN para buscar el libro");
+        String isbn = scanner.nextLine();
+        for (int i = 0; i < biblioteca.getLista_libros().size(); i++) {
+            if (biblioteca.getLista_libros().get(i).getISBN().equals(isbn)) {
+                System.out.println("El libro se encuetra en la posicón " + i);
+            } else {
+                System.out.println("Se encuentra en la posición -1");
+            }
+        }
+
+
+    }
+
+    public void buscarTitulo() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Escriba el título para buscar el libro");
+        String titulo = scanner.nextLine();
+        Boolean verificat = false;
+        for (int i = 0; i < biblioteca.getLista_libros().size(); i++) {
+            if (biblioteca.getLista_libros().get(i).getTitulo().equals(titulo)) {
+                System.out.println("El libro se llama " + titulo);
+                verificat = true;
+            }
+        }
+        if (verificat){
+            System.out.println("Busca satisfactoria");
+        }else {
+            System.out.println("No se encontró el libro");
+        }
+
+
+    }
+
 }
 
