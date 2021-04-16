@@ -7,29 +7,31 @@ public class Libro {
     private String editorial;
     private Integer nº_copias = 1;
     private Integer nº_copias_disponibles = 1;
-    private Integer contador;
-    Biblioteca biblioteca = new Biblioteca();
 
-    public Integer getContador() {
-        return contador;
-    }
 
-    public void setContador(Integer contador) {
-        this.contador = contador;
+    @Override
+    public String toString() {
+        return "Libro{" +
+                "ISBN=" + ISBN +
+                ", titulo='" + titulo + '\'' +
+                ", autor='" + autor + '\'' +
+                ", editorial='" + editorial + '\'' +
+                ", nº_copias=" + nº_copias +
+                ", nº_copias_disponibles=" + nº_copias_disponibles +
+                '}';
     }
 
     public Libro() {
 
     }
 
-    public Libro(Integer ISBN, String titulo, String autor, String editorial, Integer nº_copias, Integer nº_copias_disponibles, Integer contador) {
+    public Libro(Integer ISBN, String titulo, String autor, String editorial, Integer nº_copias, Integer nº_copias_disponibles) {
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.autor = autor;
         this.editorial = editorial;
         this.nº_copias = nº_copias;
         this.nº_copias_disponibles = nº_copias_disponibles;
-        this.contador = contador;
     }
 
     public Integer getISBN() {
@@ -83,7 +85,8 @@ public class Libro {
         this.nº_copias_disponibles = nº_copias_disponibles;
     }
 
-    public void añadirLibro() {
+    //Mètode verificat, falta contador
+    public static void añadirLibro() {
         Libro libro = new Libro();
         Scanner pedir_libros = new Scanner(System.in);
         System.out.println("Escriba el titulo del libro ");
@@ -98,16 +101,20 @@ public class Libro {
         System.out.println("A que editorial pertenece");
         String editorial = pedir_libros.nextLine();
         libro.setEditorial(editorial);
-        biblioteca.añadirLibro(libro);
-
+        Biblioteca.añadirLibro(libro);
+        for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
+            if (Biblioteca.getLista_libros().get(i).getISBN()!=ISBN) {
+                Biblioteca.setContador(Biblioteca.getContador()+1);
+            }
+        }
     }
 
-    public void eliminarLibro() {
+    public static void eliminarLibro() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Escriba un ISBN para buscar el libro");
-        String isbn = scanner.nextLine();
-        for (int i = 0; i < biblioteca.getLista_libros().size(); i++) {
-            if (biblioteca.getLista_libros().get(i).getISBN().equals(isbn)) {
+        Integer isbn = Integer.valueOf(scanner.nextLine());
+        for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
+            if (Biblioteca.getLista_libros().get(i).getISBN().equals(isbn)) {
 
             } else {
 
@@ -116,39 +123,43 @@ public class Libro {
 
     }
 
-    public void buscarISBN() {
+    //Mètode verificat
+    public static void buscarISBN() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Escriba un ISBN para buscar el libro");
-        String isbn = scanner.nextLine();
-        for (int i = 0; i < biblioteca.getLista_libros().size(); i++) {
-            if (biblioteca.getLista_libros().get(i).getISBN().equals(isbn)) {
-                System.out.println("El libro se encuetra en la posicón " + i);
-            } else {
-                System.out.println("Se encuentra en la posición -1");
+        Integer isbn = Integer.valueOf(scanner.nextLine());
+        boolean verificat = false;
+        for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
+            if (Biblioteca.getLista_libros().get(i).getISBN().equals(isbn)) {
+                System.out.println("El libro se llama: " + Biblioteca.getLista_libros().get(i).toString());
+                verificat = true;
             }
         }
-
+        if (verificat) {
+            System.out.println("Busca satisfactoria");
+        } else {
+            System.out.println("No se encontró el libro");
+        }
 
     }
 
-    public void buscarTitulo() {
+    //Mètode verificat
+    public static void buscarTitulo() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Escriba el título para buscar el libro");
         String titulo = scanner.nextLine();
-        Boolean verificat = false;
-        for (int i = 0; i < biblioteca.getLista_libros().size(); i++) {
-            if (biblioteca.getLista_libros().get(i).getTitulo().equals(titulo)) {
+        boolean verificat = false;
+        for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
+            if (Biblioteca.getLista_libros().get(i).getTitulo().equals(titulo)) {
                 System.out.println("El libro se llama " + titulo);
                 verificat = true;
             }
         }
-        if (verificat){
+        if (verificat) {
             System.out.println("Busca satisfactoria");
-        }else {
+        } else {
             System.out.println("No se encontró el libro");
         }
-
-
     }
 
 }

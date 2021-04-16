@@ -1,13 +1,13 @@
 public abstract class  Persona {
     private String nombre;
     private String apellido1;
-    private String apeellido2;
+    private String apellido2;
     private Integer edad;
 
     public Persona(String nombre, String apellido1, String apeellido2, Integer edad) {
         this.nombre = nombre;
         this.apellido1 = apellido1;
-        this.apeellido2 = apeellido2;
+        this.apellido2 = apeellido2;
         this.edad = edad;
     }
 
@@ -28,11 +28,11 @@ public abstract class  Persona {
     }
 
     public String getApeellido2() {
-        return apeellido2;
+        return apellido2;
     }
 
     public void setApeellido2(String apeellido2) {
-        this.apeellido2 = apeellido2;
+        this.apellido2 = apeellido2;
     }
 
     public Integer getEdad() {

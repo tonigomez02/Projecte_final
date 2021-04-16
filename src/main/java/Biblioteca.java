@@ -1,11 +1,20 @@
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Biblioteca {
     private String nombre;
-    private List<Libro> lista_libros = new ArrayList<Libro>();
-    private List<Persona> lista_personas=new ArrayList<Persona>();
+    private static List<Libro> lista_libros = new ArrayList<Libro>();
+    private static List<Persona> lista_personas=new ArrayList<Persona>();
+    private static Integer contador=0;
+
+    @Override
+    public String toString() {
+        return "Biblioteca{" +
+                "nombre='" + nombre + '\'' +
+                '}';
+    }
 
     public String getNombre() {
         return nombre;
@@ -23,33 +32,47 @@ public class Biblioteca {
 
     }
 
-    public List<Libro> getLista_libros() {
+    public static List<Libro> getLista_libros() {
         return lista_libros;
     }
 
     public void setLista_libros(List<Libro> lista_libros) {
-        this.lista_libros = lista_libros;
+        Biblioteca.lista_libros = lista_libros;
     }
 
-    public List<Persona> getLista_personas() {
+    public static List<Persona> getLista_personas() {
         return lista_personas;
     }
 
     public void setLista_personas(List<Persona> lista_personas) {
-        this.lista_personas = lista_personas;
+        Biblioteca.lista_personas = lista_personas;
+    }
+
+    public static Integer getContador() {
+        return contador;
+    }
+
+    public static void setContador(Integer contador) {
+        Biblioteca.contador = contador;
     }
 
     public Biblioteca(String nombre, List<Libro> lista_libros, List<Persona> lista_personas) {
         this.nombre = nombre;
-        this.lista_libros = lista_libros;
-        this.lista_personas = lista_personas;
+        Biblioteca.lista_libros = lista_libros;
+        Biblioteca.lista_personas = lista_personas;
     }
 
     public Biblioteca(){
 
     }
 
-    public void añadirLibro(Libro libro){
+    public static void añadirLibro(Libro libro){
         getLista_libros().add(libro);
+    }
+
+    public void mostrarLibros(){
+        for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
+            System.out.println(Biblioteca.getLista_libros().get(i).toString());
+        }
     }
 }
