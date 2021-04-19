@@ -25,13 +25,12 @@ public class Libro {
 
     }
 
-    public Libro(Integer ISBN, String titulo, String autor, String editorial, Integer nº_copias, Integer nº_copias_disponibles) {
+    public Libro(Integer ISBN, String titulo, String autor, String editorial) {
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.autor = autor;
         this.editorial = editorial;
-        this.nº_copias = nº_copias;
-        this.nº_copias_disponibles = nº_copias_disponibles;
+
     }
 
     public Integer getISBN() {
@@ -101,10 +100,12 @@ public class Libro {
         System.out.println("A que editorial pertenece");
         String editorial = pedir_libros.nextLine();
         libro.setEditorial(editorial);
-        Biblioteca.añadirLibro(libro);
         for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
-            if (Biblioteca.getLista_libros().get(i).getISBN()!=ISBN) {
+            if (!Biblioteca.getLista_libros().get(i).getISBN().equals(ISBN)) {
                 Biblioteca.setContador(Biblioteca.getContador()+1);
+                Biblioteca.añadirLibro(libro);
+            }else {
+                Biblioteca.getLista_libros().get(i).setNº_copias(Biblioteca.getLista_libros().get(i).getNº_copias()+1);
             }
         }
     }
@@ -143,7 +144,7 @@ public class Libro {
 
     }
 
-    //Mètode verificat
+    //Mètode verificat, pulir cerca.
     public static void buscarTitulo() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Escriba el título para buscar el libro");
@@ -153,6 +154,8 @@ public class Libro {
             if (Biblioteca.getLista_libros().get(i).getTitulo().equals(titulo)) {
                 System.out.println("El libro se llama " + titulo);
                 verificat = true;
+            }else {
+                System.out.println("");
             }
         }
         if (verificat) {
