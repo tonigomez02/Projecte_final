@@ -7,7 +7,7 @@ public class Biblioteca {
     private String nombre;
     private static List<Libro> lista_libros = new ArrayList<Libro>();
     private static List<Persona> lista_personas=new ArrayList<Persona>();
-    private static Integer contador=0;
+    private static Integer contador=1;
 
     @Override
     public String toString() {

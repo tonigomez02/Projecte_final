@@ -84,10 +84,13 @@ public class Libro {
         this.nº_copias_disponibles = nº_copias_disponibles;
     }
 
-    //Mètode verificat, falta contador
+    //Mètode verificat
     public static void añadirLibro() {
         Libro libro = new Libro();
         Scanner pedir_libros = new Scanner(System.in);
+        boolean entrada = true;
+        int ayuda = 0;
+
         System.out.println("Escriba el titulo del libro ");
         String titulo = pedir_libros.nextLine();
         libro.setTitulo(titulo);
@@ -101,12 +104,21 @@ public class Libro {
         String editorial = pedir_libros.nextLine();
         libro.setEditorial(editorial);
         for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
-            if (!Biblioteca.getLista_libros().get(i).getISBN().equals(ISBN)) {
-                Biblioteca.setContador(Biblioteca.getContador()+1);
-                Biblioteca.añadirLibro(libro);
-            }else {
-                Biblioteca.getLista_libros().get(i).setNº_copias(Biblioteca.getLista_libros().get(i).getNº_copias()+1);
+
+            if (entrada) {
+                if (Biblioteca.getLista_libros().get(i).getISBN().equals(ISBN)) {
+                    Biblioteca.getLista_libros().get(i).setNº_copias(Biblioteca.getLista_libros().get(i).getNº_copias() + 1);
+                    Biblioteca.getLista_libros().get(i).setNº_copias_disponibles(Biblioteca.getLista_libros().get(i).getNº_copias_disponibles() + 1);
+                    entrada = false;
+                } else{
+                    ayuda +=1;
+                }
             }
+
+        }
+        if (ayuda == Biblioteca.getContador()){
+            Biblioteca.añadirLibro(libro);
+            Biblioteca.setContador(Biblioteca.getContador()+1);
         }
     }
 
@@ -154,7 +166,7 @@ public class Libro {
             if (Biblioteca.getLista_libros().get(i).getTitulo().equals(titulo)) {
                 System.out.println("El libro se llama " + titulo);
                 verificat = true;
-            }else {
+            } else {
                 System.out.println("");
             }
         }
