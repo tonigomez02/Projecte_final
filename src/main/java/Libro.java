@@ -11,14 +11,13 @@ public class Libro {
 
     @Override
     public String toString() {
-        return "Libro{" +
-                "ISBN=" + ISBN +
-                ", titulo='" + titulo + '\'' +
-                ", autor='" + autor + '\'' +
-                ", editorial='" + editorial + '\'' +
-                ", nº_copias=" + nº_copias +
-                ", nº_copias_disponibles=" + nº_copias_disponibles +
-                '}';
+        return "\n" +
+                "Titulo: " + titulo + "\n" +
+                "ISBN: " + ISBN + "\n" +
+                "Autor: " + autor + "\n" +
+                "Editorial: " + editorial + "\n" +
+                "Nº_copias: " + nº_copias + "\n" +
+                "Nº_copias_disponibles: " + nº_copias_disponibles + "\n" ;
     }
 
     public Libro() {
@@ -110,15 +109,15 @@ public class Libro {
                     Biblioteca.getLista_libros().get(i).setNº_copias(Biblioteca.getLista_libros().get(i).getNº_copias() + 1);
                     Biblioteca.getLista_libros().get(i).setNº_copias_disponibles(Biblioteca.getLista_libros().get(i).getNº_copias_disponibles() + 1);
                     entrada = false;
-                } else{
-                    ayuda +=1;
+                } else {
+                    ayuda += 1;
                 }
             }
 
         }
-        if (ayuda == Biblioteca.getContador()){
+        if (ayuda == Biblioteca.getContador()) {
             Biblioteca.añadirLibro(libro);
-            Biblioteca.setContador(Biblioteca.getContador()+1);
+            Biblioteca.setContador(Biblioteca.getContador() + 1);
         }
     }
 

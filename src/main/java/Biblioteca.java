@@ -11,7 +11,7 @@ public class Biblioteca {
 
     @Override
     public String toString() {
-        return "Biblioteca{" +
+        return "\n" + "Biblioteca " +
                 "nombre='" + nombre + '\'' +
                 '}';
     }
