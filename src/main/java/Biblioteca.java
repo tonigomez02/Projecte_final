@@ -6,7 +6,8 @@ import java.util.List;
 public class Biblioteca {
     private String nombre;
     private static List<Libro> lista_libros = new ArrayList<Libro>();
-    private static List<Persona> lista_personas=new ArrayList<Persona>();
+    private static List<Usuario> lista_usuarios=new ArrayList<>();
+    private static List<Bibliotecario> bibliotecarios=new ArrayList<>();
     private static Integer contador=1;
 
     @Override
@@ -14,6 +15,22 @@ public class Biblioteca {
         return "\n" + "Biblioteca " +
                 "nombre='" + nombre + '\'' +
                 '}';
+    }
+
+    public static List<Usuario> getLista_usuarios() {
+        return lista_usuarios;
+    }
+
+    public static void setLista_usuarios(List<Usuario> lista_usuarios) {
+        Biblioteca.lista_usuarios = lista_usuarios;
+    }
+
+    public static List<Bibliotecario> getBibliotecarios() {
+        return bibliotecarios;
+    }
+
+    public static void setBibliotecarios(List<Bibliotecario> bibliotecarios) {
+        Biblioteca.bibliotecarios = bibliotecarios;
     }
 
     public String getNombre() {
@@ -26,6 +43,7 @@ public class Biblioteca {
         if (lletraNom.equals(lletraClau)){
             this.nombre = nombre;
             System.out.println("Se añadido el nombre correctamente");
+            Utils.setSalida(false);
         }else {
             System.out.println("El nom es incorrecte. Escriu en majúscula la primera lletra");
         }
@@ -40,13 +58,6 @@ public class Biblioteca {
         Biblioteca.lista_libros = lista_libros;
     }
 
-    public static List<Persona> getLista_personas() {
-        return lista_personas;
-    }
-
-    public void setLista_personas(List<Persona> lista_personas) {
-        Biblioteca.lista_personas = lista_personas;
-    }
 
     public static Integer getContador() {
         return contador;
@@ -56,10 +67,8 @@ public class Biblioteca {
         Biblioteca.contador = contador;
     }
 
-    public Biblioteca(String nombre, List<Libro> lista_libros, List<Persona> lista_personas) {
+    public Biblioteca(String nombre) {
         this.nombre = nombre;
-        Biblioteca.lista_libros = lista_libros;
-        Biblioteca.lista_personas = lista_personas;
     }
 
     public Biblioteca(){

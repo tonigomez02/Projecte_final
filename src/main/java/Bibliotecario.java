@@ -33,4 +33,5 @@ public class Bibliotecario extends Persona{
         this.contraseña=contraseña;
         this.puesto_de_trabajo=puesto_de_trabajo;
     }
+    //public
 }

@@ -5,29 +5,31 @@ public class Main {
 
     public static void main(String[] args) {
         Biblioteca biblioteca = new Biblioteca();
-        Libro libro = new Libro(2323, "Padrino", "Mario Puzzo" , "Los mejores libros");
+        Libro libro = new Libro(2323, "Padrino", "Mario Puzzo", "Los mejores libros");
         Biblioteca.añadirLibro(libro);
         Scanner teclado = new Scanner(System.in);
         boolean salir = true;// variable salida
         int opcion = 0;
         int retorno = 0;
-        // variable que va actuar para cada una de las opciones
         while (salir) {
-            System.out.println("1- Añadir libro");
+            Utils.inicializar();
+        }
+
+
+        // variable que va actuar para cada una de las opciones
+       /* while (salir) {
+            //System.out.println("1- Añadir libro");//moure ;
             System.out.println("2- Buscar libro por titulo");
             System.out.println("3- Buscar libro por ISBN");
             System.out.println("4- Mostras libros");
-            System.out.println("5- Log in");
             System.out.println("6- Salir");
 
             try {
                 System.out.println("Escribe una de las opciones");
-                /* almaceno en la variable opcion declara en la linea 8 el contenido
-                 * que el usuario me haya introducido mediante el Scaner*/
+                *//* almaceno en la variable opcion declara en la linea 8 el contenido
+         * que el usuario me haya introducido mediante el Scaner*//*
                 opcion = teclado.nextInt();
-                if (opcion == 6) {
-                    salir = false;
-                }
+                if (opcion == 6)
                 retorno = 0;
 
 
@@ -79,5 +81,6 @@ public class Main {
 
         }
         System.out.println("Adiós, esperemos que vuelva pronto");
+    }*/
     }
 }

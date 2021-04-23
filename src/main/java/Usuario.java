@@ -6,6 +6,11 @@ public class Usuario extends Persona {
     private Integer codigo_postal;
     private String correo_electronico;
     private List<Reserva> lista_reservas;
+
+    public Usuario(String nombre, String apellido1, String apeellido2, Integer edad) {
+        super(nombre, apellido1, apeellido2, edad);
+    }
+
     public Integer getTelefono() {
         return telefono;
     }
@@ -38,7 +43,7 @@ public class Usuario extends Persona {
         this.correo_electronico = correo_electronico;
     }
 
-    public Usuario(String nombre, String apellido1, String apeellido2, Integer edad, Integer telefono, String dirección, String correo_electronico, Integer codigo_postal, List<Reserva> lista_reservas) {
+   /* public Usuario(String nombre, String apellido1, String apeellido2, Integer edad, Integer telefono, String dirección, String correo_electronico, Integer codigo_postal, List<Reserva> lista_reservas) {
         super(nombre, apellido1, apeellido2, edad);
         this.telefono=telefono;
         this.dirección=dirección;
@@ -46,4 +51,7 @@ public class Usuario extends Persona {
         this.codigo_postal=codigo_postal;
         this.lista_reservas= lista_reservas;
     }
+    public Usuario(){
+        super();
+    }*/
 }
