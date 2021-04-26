@@ -87,8 +87,6 @@ public class Libro {
     public static void añadirLibro() {
         Libro libro = new Libro();
         Scanner pedir_libros = new Scanner(System.in);
-        boolean entrada = true;
-        int ayuda = 0;
 
         System.out.println("Escriba el titulo del libro ");
         String titulo = pedir_libros.nextLine();
@@ -102,23 +100,7 @@ public class Libro {
         System.out.println("A que editorial pertenece");
         String editorial = pedir_libros.nextLine();
         libro.setEditorial(editorial);
-        for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
-
-            if (entrada) {
-                if (Biblioteca.getLista_libros().get(i).getISBN().equals(ISBN)) {
-                    Biblioteca.getLista_libros().get(i).setNº_copias(Biblioteca.getLista_libros().get(i).getNº_copias() + 1);
-                    Biblioteca.getLista_libros().get(i).setNº_copias_disponibles(Biblioteca.getLista_libros().get(i).getNº_copias_disponibles() + 1);
-                    entrada = false;
-                } else {
-                    ayuda += 1;
-                }
-            }
-
-        }
-        if (ayuda == Biblioteca.getContador()) {
-            Biblioteca.añadirLibro(libro);
-            Biblioteca.setContador(Biblioteca.getContador() + 1);
-        }
+        Biblioteca.añadirLibro(libro);
     }
 
     public static void eliminarLibro() {

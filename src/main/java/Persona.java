@@ -1,3 +1,5 @@
+
+
 public abstract class  Persona {
     private String nombre;
     private String apellido1;
@@ -9,6 +11,10 @@ public abstract class  Persona {
         this.apellido1 = apellido1;
         this.apellido2 = apeellido2;
         this.edad = edad;
+    }
+
+    public Persona() {
+
     }
 
     public String getNombre() {

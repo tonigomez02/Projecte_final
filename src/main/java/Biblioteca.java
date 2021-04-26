@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Biblioteca {
     private String nombre;
-    private static List<Libro> lista_libros = new ArrayList<Libro>();
+    private static List<Libro> lista_libros = new ArrayList<>();
     private static List<Usuario> lista_usuarios=new ArrayList<>();
     private static List<Bibliotecario> bibliotecarios=new ArrayList<>();
     private static Integer contador=1;
@@ -58,7 +58,6 @@ public class Biblioteca {
         Biblioteca.lista_libros = lista_libros;
     }
 
-
     public static Integer getContador() {
         return contador;
     }
@@ -74,9 +73,51 @@ public class Biblioteca {
     public Biblioteca(){
 
     }
+    public static void añadirLibroUnico(Libro libro){
+        //Añadir el primer Libro sin control de ISBN
+        getLista_libros().add(libro);
+    }
 
     public static void añadirLibro(Libro libro){
-        getLista_libros().add(libro);
+        boolean entrada = true;
+        int ayuda = 0;
+        for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
+
+            if (entrada) {
+                if (Biblioteca.getLista_libros().get(i).getISBN().equals(libro.getISBN())) {
+                    Biblioteca.getLista_libros().get(i).setNº_copias(Biblioteca.getLista_libros().get(i).getNº_copias() + 1);
+                    Biblioteca.getLista_libros().get(i).setNº_copias_disponibles(Biblioteca.getLista_libros().get(i).getNº_copias_disponibles() + 1);
+                    entrada = false;
+                } else {
+                    ayuda += 1;
+                }
+            }
+
+        }
+        if (ayuda == Biblioteca.getContador()) {
+            getLista_libros().add(libro);
+            Biblioteca.setContador(Biblioteca.getContador() + 1);
+        }
+    }
+
+    public static void añadirUsuarioUnico(Usuario usuario){
+       getLista_usuarios().add(usuario);
+    }
+
+    public static void añadirUsuario(Usuario usuario){
+        for (int i = 0; i < Biblioteca.getLista_usuarios().size(); i++) {
+            if (Biblioteca.getLista_usuarios().get(i).getCorreo_electronico().equals(usuario.getCorreo_electronico())){
+                System.out.println("Este usuario ya existe");
+            }else {
+                System.out.println("Usuario registrado correctamente");
+                getLista_usuarios().add(usuario);
+            }
+        }
+
+    }
+
+    public static void añadirBibliotecario(Bibliotecario bibliotecario){
+        getBibliotecarios().add(bibliotecario);
     }
 
     public void mostrarLibros(){

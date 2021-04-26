@@ -10,6 +10,9 @@ public class Reserva {
         this.fecha = fecha;
     }
 
+    public Reserva() {
+    }
+
     public Libro getLibro() {
         return libro;
     }
@@ -26,8 +29,7 @@ public class Reserva {
         this.fecha = fecha;
     }
 
-    public Reserva() {
-    }
+
 }
 
 

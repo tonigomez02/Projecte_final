@@ -1,11 +1,20 @@
-import javax.print.DocFlavor;
 import java.util.Scanner;
 
 public class Utils {
 
-     private static boolean salida=true;
+    private static boolean salida = true;
+    private static Integer opcionMenu = 0;
+    private static Biblioteca biblioteca = new Biblioteca();
 
-    public  static boolean  getSalida() {
+    public static Biblioteca getBiblioteca() {
+        return biblioteca;
+    }
+
+    public static void setBiblioteca(Biblioteca biblioteca) {
+        Utils.biblioteca = biblioteca;
+    }
+
+    public static boolean getSalida() {
         return salida;
     }
 
@@ -13,25 +22,31 @@ public class Utils {
         Utils.salida = salida;
     }
 
-    public static void inicializar(){
-        Biblioteca biblioteca=new Biblioteca();
-        Scanner pedir_datos=new Scanner(System.in);
+    public static boolean isSalida() {
+        return salida;
+    }
+
+    public static Integer getOpcionMenu() {
+        return opcionMenu;
+    }
+
+    public static void setOpcionMenu(Integer opcionMenu) {
+        Utils.opcionMenu = opcionMenu;
+    }
+
+    public static void inicializar() {
+        Usuario primerUsuario = new Usuario("Pepe", "Martínez", "Eastwood", 77);
+        Biblioteca.añadirUsuarioUnico(primerUsuario);
+        Libro libro = new Libro(2323, "Padrino", "Mario Puzzo", "Los mejores libros");
+        Biblioteca.añadirLibroUnico(libro);
+        Scanner pedir_datos = new Scanner(System.in);
+
         System.out.println("Bienvenido a la biblioteca");
         while (Utils.getSalida()) {
             System.out.println("Escriba el nombre de la biblioteca");
-            String nombre= pedir_datos.nextLine();
+            String nombre = pedir_datos.nextLine();
             biblioteca.setNombre(nombre);
 
-
-        }
-        System.out.println("Que sistema de login quiere usar ");
-        System.out.println("1. Entrar como usuario");
-        System.out.println("2. Entrar como bibliotecario ");
-        Integer opcion= pedir_datos.nextInt();
-        if (opcion==1){
-            System.out.println("Ha entrado como usario,esctiba su nombre");
-            String nombre_usuario=pedir_datos.nextLine();
-            Usuario nuevo_usuario=new Usuario();
         }
 
     }
