@@ -6,9 +6,9 @@ import java.util.List;
 public class Biblioteca {
     private String nombre;
     private static List<Libro> lista_libros = new ArrayList<>();
-    private static List<Usuario> lista_usuarios=new ArrayList<>();
-    private static List<Bibliotecario> bibliotecarios=new ArrayList<>();
-    private static Integer contador=1;
+    private static List<Usuario> lista_usuarios = new ArrayList<>();
+    private static List<Bibliotecario> bibliotecarios = new ArrayList<>();
+    private static Integer contador = 1;
 
     @Override
     public String toString() {
@@ -40,11 +40,11 @@ public class Biblioteca {
     public void setNombre(String nombre) {
         String lletraNom = String.valueOf(nombre.charAt(0));
         String lletraClau = String.valueOf(nombre.toUpperCase().charAt(0));
-        if (lletraNom.equals(lletraClau)){
+        if (lletraNom.equals(lletraClau)) {
             this.nombre = nombre;
             System.out.println("Se añadido el nombre correctamente");
             Utils.setSalida(false);
-        }else {
+        } else {
             System.out.println("El nom es incorrecte. Escriu en majúscula la primera lletra");
         }
 
@@ -70,15 +70,16 @@ public class Biblioteca {
         this.nombre = nombre;
     }
 
-    public Biblioteca(){
+    public Biblioteca() {
 
     }
-    public static void añadirLibroUnico(Libro libro){
+
+    public static void añadirLibroUnico(Libro libro) {
         //Añadir el primer Libro sin control de ISBN
         getLista_libros().add(libro);
     }
 
-    public static void añadirLibro(Libro libro){
+    public static void añadirLibro(Libro libro) {
         boolean entrada = true;
         int ayuda = 0;
         for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
@@ -100,27 +101,56 @@ public class Biblioteca {
         }
     }
 
-    public static void añadirUsuarioUnico(Usuario usuario){
-       getLista_usuarios().add(usuario);
+    public static void añadirUsuarioUnico(Usuario usuario) {
+        getLista_usuarios().add(usuario);
     }
 
-    public static void añadirUsuario(Usuario usuario){
+    public static void añadirUsuario(Usuario usuario) {
+        boolean salida = true;
+        int ayuda = 0;
         for (int i = 0; i < Biblioteca.getLista_usuarios().size(); i++) {
-            if (Biblioteca.getLista_usuarios().get(i).getCorreo_electronico().equals(usuario.getCorreo_electronico())){
-                System.out.println("Este usuario ya existe");
-            }else {
-                System.out.println("Usuario registrado correctamente");
-                getLista_usuarios().add(usuario);
+            if (salida) {
+                if (Biblioteca.getLista_usuarios().get(i).getCorreo_electronico().equals(usuario.getCorreo_electronico())) {
+                    System.out.println("Este usuario ya existe");
+                    salida = false;
+                } else {
+                    ayuda += 1;
+                }
             }
+
+        }
+        if (ayuda == Biblioteca.getLista_usuarios().size()) {
+            getLista_usuarios().add(usuario);
+            System.out.println("Usuario registrado correctamente");
         }
 
     }
 
-    public static void añadirBibliotecario(Bibliotecario bibliotecario){
+    public static void añadirBibliotecarioUnico(Bibliotecario bibliotecario) {
         getBibliotecarios().add(bibliotecario);
     }
 
-    public void mostrarLibros(){
+    public static void añadirBibliotecario(Bibliotecario bibliotecario) {
+        boolean salida = true;
+        int ayuda = 0;
+        for (int i = 0; i < Biblioteca.getBibliotecarios().size(); i++) {
+            if (salida) {
+                if (Biblioteca.getBibliotecarios().get(i).getNIF().equals(bibliotecario.getNIF())) {
+                    System.out.println("Este bibliotecario ya existe");
+                    salida = false;
+                } else {
+                    ayuda += 1;
+                }
+            }
+
+        }
+        if (ayuda == Biblioteca.getBibliotecarios().size()) {
+            getBibliotecarios().add(bibliotecario);
+            System.out.println("Bibliotecario registrado correctamente");
+        }
+    }
+
+    public void mostrarLibros() {
         for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
             System.out.println(Biblioteca.getLista_libros().get(i).toString());
         }

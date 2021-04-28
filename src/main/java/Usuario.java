@@ -41,13 +41,24 @@ public class Usuario extends Persona {
         this.correo_electronico = correo_electronico;
     }
 
-    public Usuario(String nombre, String apellido1, String apeellido2, Integer edad, Integer telefono, String dirección, String correo_electronico, Integer codigo_postal, List<Reserva> lista_reservas) {
+    public List<Reserva> getLista_reservas() {
+        return lista_reservas;
+    }
+
+    public void setLista_reservas(List<Reserva> lista_reservas) {
+        this.lista_reservas = lista_reservas;
+    }
+
+    public void añadirReserva(Reserva reserva){
+        this.lista_reservas.add(reserva);
+    }
+
+    public Usuario(String nombre, String apellido1, String apeellido2, Integer edad, Integer telefono, String dirección, String correo_electronico, Integer codigo_postal) {
         super(nombre, apellido1, apeellido2, edad);
         this.telefono=telefono;
         this.dirección=dirección;
         this.correo_electronico = correo_electronico;
         this.codigo_postal=codigo_postal;
-        this.lista_reservas= lista_reservas;
     }
     public Usuario(){
     }
