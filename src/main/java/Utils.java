@@ -38,7 +38,7 @@ public class Utils {
         Bibliotecario bibliotecario = new Bibliotecario("Admin", "AdminApellido1", "AdminApellido2", 45, "12345678A", "biblioteca", "Jefazo");
         Usuario primerUsuario = new Usuario("Pepe", "Martínez", "Eastwood", 77, 971674856, "Carrer de la vida", "pepemartinez@gmail.com", 07567);
         Biblioteca.añadirUsuarioUnico(primerUsuario);
-        Libro libro = new Libro(2323, "Padrino", "Mario Puzzo", "Los mejores libros");
+        Libro libro = new Libro(2323, "Padrino", "Mario Puzzo", "Los mejores libros", false);
         Biblioteca.añadirLibroUnico(libro);
         Scanner pedir_datos = new Scanner(System.in);
 

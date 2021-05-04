@@ -3,8 +3,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+
         Scanner teclado = new Scanner(System.in);
-        boolean salir = true;// variable salida
+        boolean salir = true; // variable salida
         int opcion = 0;
         int retorno = 0;
 
@@ -20,13 +21,14 @@ public class Main {
 
             if (Utils.getOpcionMenu() == 1) {
                 System.out.println("Ha accedido como bibliotecario");
-                while (opcion != 6) {
+                while (opcion != 7) {
                     System.out.println("1- Reservar libro");
                     System.out.println("2- Añadir libro");
                     System.out.println("3- Eliminar libro");
                     System.out.println("4- Crear Usuario");
                     System.out.println("5- Crear bibliotecario");
-                    System.out.println("6- Log out");
+                    System.out.println("6- Devolver libro");
+                    System.out.println("7- Log out");
                     opcion = teclado.nextInt();
                     retorno = 0;
 
@@ -79,16 +81,27 @@ public class Main {
                                 retorno = teclado.nextInt();
                             }
                             break;
+
+                        case 6:
+
+                            while (retorno != 1) {
+                                Reserva.devolverLibro();
+                                System.out.println("1 - Salir");
+                                System.out.println("2 - Devolver otro libro");
+                                retorno = teclado.nextInt();
+                            }
+                            break;
                     }
                 }
 
             } else if (Utils.getOpcionMenu() == 2) {
                 System.out.println("Ha accedido como invitado");
-                while (opcion != 4) {
+                while (opcion != 5) {
                     System.out.println("1- Buscar libro por titulo");
                     System.out.println("2- Buscar libro por ISBN");
                     System.out.println("3- Mostras libros");
-                    System.out.println("4- Log out");
+                    System.out.println("4- Mostrar lista de reservas");
+                    System.out.println("5- Log out");
                     opcion = teclado.nextInt();
                     retorno = 0;
 
@@ -117,6 +130,15 @@ public class Main {
 
                             while (retorno != 1) {
                                 Utils.getBiblioteca().mostrarLibros();
+                                System.out.println("1 - Salir");
+                                retorno = teclado.nextInt();
+                            }
+                            break;
+
+                        case 4:
+
+                            while (retorno != 1) {
+                                Reserva.mostrarReservas();
                                 System.out.println("1 - Salir");
                                 retorno = teclado.nextInt();
                             }

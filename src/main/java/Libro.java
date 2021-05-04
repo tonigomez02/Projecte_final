@@ -7,6 +7,7 @@ public class Libro {
     private String editorial;
     private Integer nº_copias = 1;
     private Integer nº_copias_disponibles = 1;
+    private boolean reserva;
 
 
     @Override
@@ -17,18 +18,20 @@ public class Libro {
                 "Autor: " + autor + "\n" +
                 "Editorial: " + editorial + "\n" +
                 "Nº_copias: " + nº_copias + "\n" +
-                "Nº_copias_disponibles: " + nº_copias_disponibles + "\n" ;
+                "Nº_copias_disponibles: " + nº_copias_disponibles + "\n" +
+                "Reserva: " + reserva + "\n";
     }
 
     public Libro() {
 
     }
 
-    public Libro(Integer ISBN, String titulo, String autor, String editorial) {
+    public Libro(Integer ISBN, String titulo, String autor, String editorial, boolean reserva) {
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.autor = autor;
         this.editorial = editorial;
+        this.reserva = reserva;
 
     }
 
@@ -83,6 +86,14 @@ public class Libro {
         this.nº_copias_disponibles = nº_copias_disponibles;
     }
 
+    public boolean isReserva() {
+        return reserva;
+    }
+
+    public void setReserva(boolean reserva) {
+        this.reserva = reserva;
+    }
+
     //Mètode verificat
     public static void añadirLibro() {
         Libro libro = new Libro();
@@ -100,6 +111,7 @@ public class Libro {
         System.out.println("A que editorial pertenece");
         String editorial = pedir_libros.nextLine();
         libro.setEditorial(editorial);
+        libro.setReserva(false);
         Biblioteca.añadirLibro(libro);
     }
 

@@ -7,7 +7,7 @@ public class Usuario extends Persona {
     private String dirección;
     private Integer codigo_postal;
     private String correo_electronico;
-    private List<Reserva> lista_reservas = new ArrayList<>();
+    private static List<Reserva> lista_reservas = new ArrayList<>();
 
     public Integer getTelefono() {
         return telefono;
@@ -41,16 +41,16 @@ public class Usuario extends Persona {
         this.correo_electronico = correo_electronico;
     }
 
-    public List<Reserva> getLista_reservas() {
+    public static List<Reserva> getLista_reservas() {
         return lista_reservas;
     }
 
-    public void setLista_reservas(List<Reserva> lista_reservas) {
-        this.lista_reservas = lista_reservas;
+    public static void setLista_reservas(List<Reserva> lista_reservas) {
+        Usuario.lista_reservas = lista_reservas;
     }
 
-    public void añadirReserva(Reserva reserva){
-        this.lista_reservas.add(reserva);
+    public static void añadirReserva(Reserva reserva){
+        lista_reservas.add(reserva);
     }
 
     public Usuario(String nombre, String apellido1, String apeellido2, Integer edad, Integer telefono, String dirección, String correo_electronico, Integer codigo_postal) {
