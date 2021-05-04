@@ -61,6 +61,24 @@ public class Reserva {
 
     }
 
-}
+    public static void devolverLibro() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Bienvenido a la devolución de libros");
+        System.out.println("Solicitar teléfono de usuario");
+        Integer telefono = scanner.nextInt();
+        System.out.println("Solicitar correo electrónico");
+        String coreo_electronico = scanner.nextLine();
+        for (int i = 0; i < Biblioteca.getLista_usuarios().size(); i++) {
+            if (Biblioteca.getLista_usuarios().get(i).getTelefono().equals(telefono) && Biblioteca.getLista_usuarios().get(i).getCorreo_electronico().equals(coreo_electronico)) {
+                System.out.println("Deme su ISBN");
+                Integer isbn= scanner.nextInt();
+
+
+
+            }
+        }
+    }
+    }
+
 
 

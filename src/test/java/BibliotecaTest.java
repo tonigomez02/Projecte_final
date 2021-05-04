@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Scanner;
 
 public class BibliotecaTest {
-
+// Comprobacón Nombre correcto biblioteca
     @Test
     void comprovarMajuscula(){
         Biblioteca biblioteca = new Biblioteca();
@@ -15,6 +15,7 @@ public class BibliotecaTest {
     }
 
     @Test
+    //Creacion de instancia de libros
     void añadirLibro(){
         Libro libro = new Libro();
         libro.añadirLibro();
