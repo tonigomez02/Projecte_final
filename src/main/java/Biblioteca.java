@@ -80,22 +80,20 @@ public class Biblioteca {
     }
 
     public static void añadirLibro(Libro libro) {
-        boolean entrada = true;
-        int ayuda = 0;
+        Integer index = 0;
+        boolean amiga = false;
+
         for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
-
-            if (entrada) {
-                if (Biblioteca.getLista_libros().get(i).getISBN().equals(libro.getISBN())) {
-                    Biblioteca.getLista_libros().get(i).setNº_copias(Biblioteca.getLista_libros().get(i).getNº_copias() + 1);
-                    Biblioteca.getLista_libros().get(i).setNº_copias_disponibles(Biblioteca.getLista_libros().get(i).getNº_copias_disponibles() + 1);
-                    entrada = false;
-                } else {
-                    ayuda += 1;
-                }
+            if (Biblioteca.getLista_libros().get(i).getISBN().equals(libro.getISBN())) {
+                index = Biblioteca.getLista_libros().indexOf(Biblioteca.getLista_libros().get(i));
+                amiga = true;
             }
-
         }
-        if (ayuda == Biblioteca.getContador()) {
+        if (amiga) {
+
+            Biblioteca.getLista_libros().get(index).setNº_copias(Biblioteca.getLista_libros().get(index).getNº_copias() + 1);
+            Biblioteca.getLista_libros().get(index).setNº_copias_disponibles(Biblioteca.getLista_libros().get(index).getNº_copias_disponibles() + 1);
+        } else {
             getLista_libros().add(libro);
             Biblioteca.setContador(Biblioteca.getContador() + 1);
         }
@@ -106,20 +104,17 @@ public class Biblioteca {
     }
 
     public static void añadirUsuario(Usuario usuario) {
-        boolean salida = true;
-        int ayuda = 0;
-        for (int i = 0; i < Biblioteca.getLista_usuarios().size(); i++) {
-            if (salida) {
-                if (Biblioteca.getLista_usuarios().get(i).getCorreo_electronico().equals(usuario.getCorreo_electronico())) {
-                    System.out.println("Este usuario ya existe");
-                    salida = false;
-                } else {
-                    ayuda += 1;
-                }
-            }
+        boolean ayuda = false;
 
+        for (int i = 0; i < Biblioteca.getLista_usuarios().size(); i++) {
+            if (Biblioteca.getLista_usuarios().get(i).getCorreo_electronico().equals(usuario.getCorreo_electronico())) {
+                ayuda = true;
+            }
         }
-        if (ayuda == Biblioteca.getLista_usuarios().size()) {
+
+        if (ayuda) {
+            System.out.println("Este usuario ya existe");
+        } else {
             getLista_usuarios().add(usuario);
             System.out.println("Usuario registrado correctamente");
         }
@@ -131,20 +126,17 @@ public class Biblioteca {
     }
 
     public static void añadirBibliotecario(Bibliotecario bibliotecario) {
-        boolean salida = true;
-        int ayuda = 0;
-        for (int i = 0; i < Biblioteca.getBibliotecarios().size(); i++) {
-            if (salida) {
-                if (Biblioteca.getBibliotecarios().get(i).getNIF().equals(bibliotecario.getNIF())) {
-                    System.out.println("Este bibliotecario ya existe");
-                    salida = false;
-                } else {
-                    ayuda += 1;
-                }
-            }
+        boolean ayuda = false;
 
+        for (int i = 0; i < Biblioteca.getBibliotecarios().size(); i++) {
+            if (Biblioteca.getBibliotecarios().get(i).getNIF().equals(bibliotecario.getNIF())) {
+                ayuda = true;
+            }
         }
-        if (ayuda == Biblioteca.getBibliotecarios().size()) {
+
+        if (ayuda) {
+            System.out.println("Este bibliotecario ya existe");
+        } else {
             getBibliotecarios().add(bibliotecario);
             System.out.println("Bibliotecario registrado correctamente");
         }
