@@ -11,6 +11,7 @@ public class Main {
 
         Utils.inicializar();
         while (salir) {
+            Bibliotecario.setSalidaLogIn(true);
             opcion = 0;
             System.out.println("Elegir tipo de Log in");
             System.out.println("1- Bibliotecario");
@@ -20,78 +21,84 @@ public class Main {
             Utils.setOpcionMenu(option);
 
             if (Utils.getOpcionMenu() == 1) {
-                System.out.println("Ha accedido como bibliotecario");
-                while (opcion != 7) {
-                    System.out.println("1- Reservar libro");
-                    System.out.println("2- Añadir libro");
-                    System.out.println("3- Eliminar libro");
-                    System.out.println("4- Crear Usuario");
-                    System.out.println("5- Crear bibliotecario");
-                    System.out.println("6- Devolver libro");
-                    System.out.println("7- Log out");
-                    opcion = teclado.nextInt();
-                    retorno = 0;
+                Bibliotecario.logInBibliotecario();
+                if (!Bibliotecario.isSalidaLogIn()){
+                    System.out.println("Ha accedido como bibliotecario");
+                    while (opcion != 7) {
+                        System.out.println("1- Reservar libro");
+                        System.out.println("2- Añadir libro");
+                        System.out.println("3- Eliminar libro");
+                        System.out.println("4- Crear Usuario");
+                        System.out.println("5- Crear bibliotecario");
+                        System.out.println("6- Devolver libro");
+                        System.out.println("7- Log out");
+                        opcion = teclado.nextInt();
+                        retorno = 0;
 
-                    switch (opcion) {
-                        case 1:
+                        switch (opcion) {
+                            case 1:
 
-                            while (retorno != 1) {
-                                Reserva.reservarLibro();
-                                System.out.println("1 - Salir");
-                                System.out.println("2 - Reservar otro libro");
-                                retorno = teclado.nextInt();
-                            }
-                            break;
+                                while (retorno != 1) {
+                                    Reserva.reservarLibro();
+                                    System.out.println("1 - Salir");
+                                    System.out.println("2 - Reservar otro libro");
+                                    retorno = teclado.nextInt();
+                                }
+                                break;
 
-                        case 2:
+                            case 2:
 
-                            while (retorno != 1) {
-                                Libro.añadirLibro();
-                                System.out.println("1 - Salir");
-                                System.out.println("2 - Añadir otro libro");
-                                retorno = teclado.nextInt();
-                            }
-                            break;
+                                while (retorno != 1) {
+                                    Libro.añadirLibro();
+                                    System.out.println("1 - Salir");
+                                    System.out.println("2 - Añadir otro libro");
+                                    retorno = teclado.nextInt();
+                                }
+                                break;
 
-                        case 3:
+                            case 3:
 
-                            while (retorno != 1) {
-                                System.out.println("1 - Salir");
-                                System.out.println("2 - Añadir otro libro");
-                                retorno = teclado.nextInt();
-                            }
-                            break;
+                                while (retorno != 1) {
+                                    Libro.eliminarLibro();
+                                    System.out.println("1 - Salir");
+                                    System.out.println("2 - Añadir otro libro");
+                                    retorno = teclado.nextInt();
+                                }
+                                break;
 
-                        case 4:
+                            case 4:
 
-                            while (retorno != 1) {
-                                Bibliotecario.añadirUsuario();
-                                System.out.println("1 - Salir");
-                                System.out.println("2 - Crear otro usuario");
-                                retorno = teclado.nextInt();
-                            }
-                            break;
+                                while (retorno != 1) {
+                                    Bibliotecario.añadirUsuario();
+                                    System.out.println("1 - Salir");
+                                    System.out.println("2 - Crear otro usuario");
+                                    retorno = teclado.nextInt();
+                                }
+                                break;
 
-                        case 5:
+                            case 5:
 
-                            while (retorno != 1) {
-                                Bibliotecario.añadirBibliotecario();
-                                System.out.println("1 - Salir");
-                                System.out.println("2 - Crear otro bibliotecario");
-                                retorno = teclado.nextInt();
-                            }
-                            break;
+                                while (retorno != 1) {
+                                    Bibliotecario.añadirBibliotecario();
+                                    System.out.println("1 - Salir");
+                                    System.out.println("2 - Crear otro bibliotecario");
+                                    retorno = teclado.nextInt();
+                                }
+                                break;
 
-                        case 6:
+                            case 6:
 
-                            while (retorno != 1) {
-                                Reserva.devolverLibro();
-                                System.out.println("1 - Salir");
-                                System.out.println("2 - Devolver otro libro");
-                                retorno = teclado.nextInt();
-                            }
-                            break;
+                                while (retorno != 1) {
+                                    Reserva.devolverLibro();
+                                    System.out.println("1 - Salir");
+                                    System.out.println("2 - Devolver otro libro");
+                                    retorno = teclado.nextInt();
+                                }
+                                break;
+                        }
                     }
+                }else {
+
                 }
 
             } else if (Utils.getOpcionMenu() == 2) {
@@ -151,7 +158,7 @@ public class Main {
                 salir = false;
             }
         }
-        //Final del whilr()
+        //Final del while()
 
         System.out.println("Gracias por usar nuestros servicios");
         System.out.println("Que tenga un bonito dia");

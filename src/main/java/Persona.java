@@ -49,5 +49,7 @@ public abstract class  Persona {
     public void setEdad(Integer edad) {
         this.edad = edad;
     }
+
+
 }
 

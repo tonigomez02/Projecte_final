@@ -4,6 +4,15 @@ public class Bibliotecario extends Persona {
     private String NIF;
     private String contraseña;
     private String puesto_de_trabajo;
+    private static boolean salidaLogIn = true;
+
+    public static boolean isSalidaLogIn() {
+        return salidaLogIn;
+    }
+
+    public static void setSalidaLogIn(boolean salidaLogIn) {
+        Bibliotecario.salidaLogIn = salidaLogIn;
+    }
 
     public Bibliotecario() {
     }
@@ -107,6 +116,53 @@ public class Bibliotecario extends Persona {
         String contraseña = recogidaDatos.nextLine();
         bibliotecario.setContraseña(contraseña);
         Biblioteca.añadirBibliotecario(bibliotecario);
+
+    }
+
+    public static void logInBibliotecario() {
+        Scanner recogidaDatos = new Scanner(System.in);
+        Scanner recogidaDatos2 = new Scanner(System.in);
+        Integer ayuda = 0;
+        Integer output = 0;
+
+        while (Bibliotecario.isSalidaLogIn() && ayuda==0) {
+            System.out.println("1- Para salir");
+            System.out.println("2- Log in");
+            output = recogidaDatos.nextInt();
+
+            switch (output) {
+
+                case 1:
+                    ayuda = 1;
+                    break;
+
+                case 2:
+                    System.out.println("NIF: ");
+                    String nif = recogidaDatos2.nextLine();
+                    System.out.println("Contrasenya: ");
+                    String contrasenya = recogidaDatos2.nextLine();
+
+                    for (int i = 0; i < Biblioteca.getBibliotecarios().size(); i++) {
+                        if (Biblioteca.getBibliotecarios().get(i).getNIF().equals(nif)
+                                && Biblioteca.getBibliotecarios().get(i).getContraseña().equals(contrasenya)) {
+
+                        } else {
+                            ayuda += 1;
+                        }
+                    }
+                    if (ayuda == Biblioteca.getBibliotecarios().size()) {
+                        System.out.println("Log in incorrecto");
+                    } else {
+                        System.out.println("Log in completado");
+                        setSalidaLogIn(false);
+                    }
+
+                    break;
+            }
+
+
+        }
+
 
     }
 }
