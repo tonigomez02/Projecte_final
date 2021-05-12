@@ -125,7 +125,7 @@ public class Bibliotecario extends Persona {
         Integer ayuda = 0;
         Integer output = 0;
 
-        while (Bibliotecario.isSalidaLogIn() && ayuda==0) {
+        while (Bibliotecario.isSalidaLogIn() && ayuda == 0) {
             System.out.println("1- Para salir");
             System.out.println("2- Log in");
             output = recogidaDatos.nextInt();
@@ -136,6 +136,7 @@ public class Bibliotecario extends Persona {
                     ayuda = 1;
                     break;
 
+                    //refactorizar
                 case 2:
                     System.out.println("NIF: ");
                     String nif = recogidaDatos2.nextLine();

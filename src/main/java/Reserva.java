@@ -1,6 +1,4 @@
-import java.beans.BeanInfo;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Reserva {
@@ -74,14 +72,14 @@ public class Reserva {
         if (entrada) {
             if (!Biblioteca.getLista_libros().get(index).getNº_copias_disponibles().equals(0)) {
 
-                System.out.println(Biblioteca.getLista_libros().get(index).toString());
                 Reserva reserva = new Reserva();
                 reserva.setLibro(Biblioteca.getLista_libros().get(index));
                 reserva.setFecha(LocalDateTime.now());
                 Biblioteca.getLista_libros().get(index).setNº_copias_disponibles(Biblioteca.getLista_libros().get(index).getNº_copias_disponibles() - 1);
                 Biblioteca.getLista_libros().get(index).setReserva(true);
                 Usuario.añadirReserva(reserva);
-                System.out.println("Reserva realizada");
+                System.out.println(Biblioteca.getLista_libros().get(index).toString());
+                System.out.println("\n" + "Reserva realizada");
 
             } else {
                 System.out.println("No hay copias disponibles");
@@ -91,13 +89,11 @@ public class Reserva {
             System.out.println("Libro no encontrado");
         }
 
-        if(ayuda.equals(Biblioteca.getLista_usuarios().size())) {
+        if (ayuda.equals(Biblioteca.getLista_usuarios().size())) {
             System.out.println("No registrado en nuestra base de datos o credenciales incorrectas");
         }
 
     }
-
-
 
 
     public static void devolverLibro() {
@@ -132,76 +128,29 @@ public class Reserva {
         }
 
         if (entrada) {
-            if (!Biblioteca.getLista_libros().get(index).getNº_copias_disponibles().equals(0)) {
+            if (Biblioteca.getLista_libros().get(index).isReserva()) {
 
+                Biblioteca.getLista_libros().get(index).setNº_copias_disponibles(Biblioteca.getLista_libros().get(index).getNº_copias_disponibles() + 1);
+                Biblioteca.getLista_libros().get(index).setReserva(false);
+                for (int i = 0; i < Usuario.getLista_reservas().size(); i++) {
+                    if (Usuario.getLista_reservas().get(i).getLibro().getISBN().equals(isbn)) {
+                        Usuario.getLista_reservas().remove(i);
+                    }
+                }
                 System.out.println(Biblioteca.getLista_libros().get(index).toString());
-                Reserva reserva = new Reserva();
-                reserva.setLibro(Biblioteca.getLista_libros().get(index));
-                reserva.setFecha(LocalDateTime.now());
-                Biblioteca.getLista_libros().get(index).setNº_copias_disponibles(Biblioteca.getLista_libros().get(index).getNº_copias_disponibles() - 1);
-                Biblioteca.getLista_libros().get(index).setReserva(true);
-                Usuario.añadirReserva(reserva);
-                System.out.println("Reserva realizada");
+                System.out.println("Devolución realizada");
 
             } else {
-                System.out.println("No hay copias disponibles");
+                System.out.println("Este libro no estaba reservado, no se puede devolver");
             }
 
-        } else {
+        }else {
             System.out.println("Libro no encontrado");
         }
 
-        if(ayuda.equals(Biblioteca.getLista_usuarios().size())) {
+        if (ayuda.equals(Biblioteca.getLista_usuarios().size())) {
             System.out.println("No registrado en nuestra base de datos o credenciales incorrectas");
         }
-
-
-        /*Scanner scanner = new Scanner(System.in);
-        boolean verificacio = false;
-        Integer isbn = 0;
-        Integer ayuda = 0;
-
-        System.out.println("Bienvenido a la devolución de libros");
-        System.out.println("Solicitar telefono del usuario");
-        Integer telefono = scanner.nextInt();
-        System.out.println("Solicitar correo electronico");
-        String correoElec = scanner.next();
-        System.out.println("Datos recogidos");
-
-        for (int i = 0; i < Biblioteca.getLista_usuarios().size(); i++) {
-            if (Biblioteca.getLista_usuarios().get(i).getTelefono().equals(telefono) && Biblioteca.getLista_usuarios().get(i).getCorreo_electronico().equals(correoElec)) {
-                System.out.println("ISBN del libro");
-                isbn = scanner.nextInt();
-                verificacio = true;
-            } else {
-
-            }
-        }
-
-        if (verificacio) {
-            for (int j = 0; j < Biblioteca.getLista_libros().size(); j++) {
-                if (Biblioteca.getLista_libros().get(j).getISBN().equals(isbn) && Biblioteca.getLista_libros().get(j).isReserva()) {
-                    Biblioteca.getLista_libros().get(j).setNº_copias_disponibles(Biblioteca.getLista_libros().get(j).getNº_copias_disponibles() + 1);
-                    Biblioteca.getLista_libros().get(j).setReserva(false);
-                    for (int i = 0; i < Usuario.getLista_reservas().size(); i++) {
-                        if (Usuario.getLista_reservas().get(i).getLibro().getISBN().equals(isbn)) {
-                            Usuario.getLista_reservas().remove(i);
-                        }
-                    }
-                    System.out.println(Biblioteca.getLista_libros().get(j).toString());
-                    System.out.println("Devolución realizada");
-
-                } else {
-                    ayuda += 1;
-                }
-            }
-        } else {
-            System.out.println("No está registrado en nuestra base de datos o credenciales incorrectas");
-        }
-
-        if (ayuda == Biblioteca.getLista_libros().size()) {
-            System.out.println("No se ha podido realizar la devolución");
-        }*/
 
     }
 

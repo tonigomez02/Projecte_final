@@ -27,7 +27,7 @@ public class Main {
                     while (opcion != 7) {
                         System.out.println("1- Reservar libro");
                         System.out.println("2- Añadir libro");
-                        System.out.println("3- Eliminar libro");
+                        System.out.println("3- Eiminar libro");
                         System.out.println("4- Crear Usuario");
                         System.out.println("5- Crear bibliotecario");
                         System.out.println("6- Devolver libro");
@@ -61,7 +61,7 @@ public class Main {
                                 while (retorno != 1) {
                                     Libro.eliminarLibro();
                                     System.out.println("1 - Salir");
-                                    System.out.println("2 - Añadir otro libro");
+                                    System.out.println("2 - Eliminar otro libro");
                                     retorno = teclado.nextInt();
                                 }
                                 break;
@@ -103,12 +103,13 @@ public class Main {
 
             } else if (Utils.getOpcionMenu() == 2) {
                 System.out.println("Ha accedido como invitado");
-                while (opcion != 5) {
+                while (opcion != 6) {
                     System.out.println("1- Buscar libro por titulo");
                     System.out.println("2- Buscar libro por ISBN");
                     System.out.println("3- Mostras libros");
                     System.out.println("4- Mostrar lista de reservas");
-                    System.out.println("5- Log out");
+                    System.out.println("5- Mostrar libros disponibles");
+                    System.out.println("6- Log out");
                     opcion = teclado.nextInt();
                     retorno = 0;
 
@@ -146,6 +147,15 @@ public class Main {
 
                             while (retorno != 1) {
                                 Reserva.mostrarReservas();
+                                System.out.println("1 - Salir");
+                                retorno = teclado.nextInt();
+                            }
+                            break;
+
+                        case 5:
+
+                            while (retorno != 1) {
+                                Utils.biblioteca.mostrarLibrosDisponibles();
                                 System.out.println("1 - Salir");
                                 retorno = teclado.nextInt();
                             }

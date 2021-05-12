@@ -45,7 +45,7 @@ public class Biblioteca {
             System.out.println("Se añadido el nombre correctamente");
             Utils.setSalida(false);
         } else {
-            System.out.println("El nom es incorrecte. Escriu en majúscula la primera lletra");
+            System.out.println("El nombre es incorrecto, escibre la primera letra en mayúscula");
         }
 
     }
@@ -74,11 +74,6 @@ public class Biblioteca {
 
     }
 
-    public static void añadirLibroUnico(Libro libro) {
-        //Añadir el primer Libro sin control de ISBN
-        getLista_libros().add(libro);
-    }
-
     public static void añadirLibro(Libro libro) {
         Integer index = 0;
         boolean amiga = false;
@@ -90,17 +85,12 @@ public class Biblioteca {
             }
         }
         if (amiga) {
-
             Biblioteca.getLista_libros().get(index).setNº_copias(Biblioteca.getLista_libros().get(index).getNº_copias() + 1);
             Biblioteca.getLista_libros().get(index).setNº_copias_disponibles(Biblioteca.getLista_libros().get(index).getNº_copias_disponibles() + 1);
         } else {
             getLista_libros().add(libro);
             Biblioteca.setContador(Biblioteca.getContador() + 1);
         }
-    }
-
-    public static void añadirUsuarioUnico(Usuario usuario) {
-        getLista_usuarios().add(usuario);
     }
 
     public static void añadirUsuario(Usuario usuario) {
@@ -121,10 +111,6 @@ public class Biblioteca {
 
     }
 
-    public static void añadirBibliotecarioUnico(Bibliotecario bibliotecario) {
-        getBibliotecarios().add(bibliotecario);
-    }
-
     public static void añadirBibliotecario(Bibliotecario bibliotecario) {
         boolean ayuda = false;
 
@@ -143,8 +129,26 @@ public class Biblioteca {
     }
 
     public void mostrarLibros() {
-        for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
-            System.out.println(Biblioteca.getLista_libros().get(i).toString());
+        if (Biblioteca.getLista_libros().isEmpty()) {
+            System.out.println("Lista vacía, no hay datos que mostrar");
+        } else {
+            for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
+                System.out.println(Biblioteca.getLista_libros().get(i).toString());
+            }
+        }
+
+    }
+
+    public void mostrarLibrosDisponibles(){
+        if (Biblioteca.getLista_libros().isEmpty()) {
+            System.out.println("Lista vacía, no hay datos que mostrar");
+        } else{
+            for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
+                if (!Biblioteca.getLista_libros().get(i).isReserva()){
+                    System.out.println(Biblioteca.getLista_libros().get(i).toString());
+                }
+
+            }
         }
     }
 }

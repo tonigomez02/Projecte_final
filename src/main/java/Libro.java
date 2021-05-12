@@ -8,18 +8,26 @@ public class Libro {
     private Integer nº_copias = 1;
     private Integer nº_copias_disponibles = 1;
     private boolean reserva;
+    private static Biblioteca biblioteca = new Biblioteca();
 
 
     @Override
     public String toString() {
-        return "\n" +
-                "Titulo: " + titulo + "\n" +
-                "ISBN: " + ISBN + "\n" +
-                "Autor: " + autor + "\n" +
-                "Editorial: " + editorial + "\n" +
-                "Nº_copias: " + nº_copias + "\n" +
-                "Nº_copias_disponibles: " + nº_copias_disponibles + "\n" +
-                "Reserva: " + reserva + "\n";
+
+        if (Biblioteca.getLista_libros().isEmpty()){
+            return "\n" + "Bilioteca vacía, sin libro." + "\n";
+        }else {
+            return  "\n" +
+                    "Titulo: " + titulo + "\n" +
+                    "ISBN: " + ISBN + "\n" +
+                    "Autor: " + autor + "\n" +
+                    "Editorial: " + editorial + "\n" +
+                    "Nº_copias: " + nº_copias + "\n" +
+                    "Nº_copias_disponibles: " + nº_copias_disponibles + "\n" +
+                    "Reserva: " + reserva + "\n";
+        }
+
+
     }
 
     public Libro() {
@@ -118,14 +126,31 @@ public class Libro {
     //Falta acabar
     public static void eliminarLibro() {
         Scanner scanner = new Scanner(System.in);
+        boolean ayuda = false;
+        Integer index = 0;
+
         System.out.println("Escriba un ISBN para buscar el libro");
         Integer isbn = Integer.valueOf(scanner.nextLine());
         for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
             if (Biblioteca.getLista_libros().get(i).getISBN().equals(isbn)) {
-
-            } else {
-
+                index = Biblioteca.getLista_libros().indexOf(Biblioteca.getLista_libros().get(i));
+                ayuda = true;
             }
+
+        }
+
+        if (ayuda){
+            if (Biblioteca.getLista_libros().get(index).isReserva()){
+                System.out.println("No se puede eliminar el libro, tiene reserva");
+            }else {
+                Biblioteca.getLista_libros().remove(Biblioteca.getLista_libros().get(index));
+                System.out.println("Libro eliminado de la lista");
+                System.out.println("Lista actualizada");
+                biblioteca.mostrarLibros();
+            }
+
+        }else {
+            System.out.println("Libro no encontrado o no se puede eliminar");
         }
 
     }
@@ -138,7 +163,7 @@ public class Libro {
         boolean verificat = false;
         for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
             if (Biblioteca.getLista_libros().get(i).getISBN().equals(isbn)) {
-                System.out.println("El libro se llama: " + Biblioteca.getLista_libros().get(i).toString());
+                System.out.println("El libro es: " + Biblioteca.getLista_libros().get(i).toString());
                 verificat = true;
             }
         }
