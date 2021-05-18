@@ -168,29 +168,31 @@ public class Libro {
             }
         }
         if (verificat) {
-            System.out.println("Busca satisfactoria");
+            System.out.println("Busqueda satisfactoria");
         } else {
             System.out.println("No se encontró el libro");
         }
 
     }
 
-    //Mètode verificat, pulir cerca.
     public static void buscarTitulo() {
         Scanner scanner = new Scanner(System.in);
+        boolean verificat = false;
+        Integer index = 0;
+
         System.out.println("Escriba el título para buscar el libro");
         String titulo = scanner.nextLine();
-        boolean verificat = false;
+
         for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
             if (Biblioteca.getLista_libros().get(i).getTitulo().equals(titulo)) {
                 System.out.println("El libro se llama " + titulo);
+                index = Biblioteca.getLista_libros().indexOf(Biblioteca.getLista_libros().get(i));
                 verificat = true;
-            } else {
-                System.out.println("");
             }
         }
         if (verificat) {
-            System.out.println("Busca satisfactoria");
+            System.out.println(Biblioteca.getLista_libros().get(index).toString());
+            System.out.println("Busqueda satisfactoria");
         } else {
             System.out.println("No se encontró el libro");
         }

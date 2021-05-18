@@ -41,7 +41,8 @@ public class Reserva {
         boolean entrada = false;
         Scanner scanner = new Scanner(System.in);
         Integer isbn = 0;
-        Integer index = 0;
+        Integer indexLibros = 0;
+        Integer indexUsuario = 0;
         Integer ayuda = 0;
 
         System.out.println("Bienvenido a la reserva de libros");
@@ -51,9 +52,10 @@ public class Reserva {
         String correoElec = scanner.next();
         System.out.println("Datos recogidos");
 
-
+        //Recorrer lista USUARIOS
         for (int i = 0; i < Biblioteca.getLista_usuarios().size(); i++) {
             if (Biblioteca.getLista_usuarios().get(i).getTelefono().equals(telefono) && Biblioteca.getLista_usuarios().get(i).getCorreo_electronico().equals(correoElec)) {
+                indexUsuario = Biblioteca.getLista_usuarios().indexOf(Biblioteca.getLista_usuarios().get(i));
                 System.out.println("ISBN del libro");
                 isbn = scanner.nextInt();
             } else {
@@ -61,24 +63,28 @@ public class Reserva {
             }
         }
 
+        //Recorrer lista LIBRO
         for (int z = 0; z < Biblioteca.getLista_libros().size(); z++) {
             if (Biblioteca.getLista_libros().get(z).getISBN().equals(isbn)) {
-                index = Biblioteca.getLista_libros().indexOf(Biblioteca.getLista_libros().get(z));
+                indexLibros = Biblioteca.getLista_libros().indexOf(Biblioteca.getLista_libros().get(z));
                 entrada = true;
             }
 
         }
 
         if (entrada) {
-            if (!Biblioteca.getLista_libros().get(index).getNº_copias_disponibles().equals(0)) {
+            if (!Biblioteca.getLista_libros().get(indexLibros).getNº_copias_disponibles().equals(0)) {
 
                 Reserva reserva = new Reserva();
-                reserva.setLibro(Biblioteca.getLista_libros().get(index));
+                reserva.setLibro(Biblioteca.getLista_libros().get(indexLibros));
                 reserva.setFecha(LocalDateTime.now());
-                Biblioteca.getLista_libros().get(index).setNº_copias_disponibles(Biblioteca.getLista_libros().get(index).getNº_copias_disponibles() - 1);
-                Biblioteca.getLista_libros().get(index).setReserva(true);
-                Usuario.añadirReserva(reserva);
-                System.out.println(Biblioteca.getLista_libros().get(index).toString());
+                Biblioteca.getLista_reservas_biblioteca().add(reserva);
+                Biblioteca.getLista_usuarios().get(indexUsuario).getLista_reservas().add(reserva);
+                Biblioteca.getLista_libros().get(indexLibros).setNº_copias_disponibles(Biblioteca.getLista_libros().get(indexLibros).getNº_copias_disponibles() - 1);
+                Biblioteca.getLista_libros().get(indexLibros).setReserva(true);
+
+                System.out.println("Estado actual del libro:");
+                System.out.println(Biblioteca.getLista_libros().get(indexLibros).toString());
                 System.out.println("\n" + "Reserva realizada");
 
             } else {
@@ -102,6 +108,7 @@ public class Reserva {
         Integer isbn = 0;
         Integer index = 0;
         Integer ayuda = 0;
+        Integer indexUsuario = 0;
 
         System.out.println("Bienvenido a la devolución de libros");
         System.out.println("Solicitar telefono del usuario");
@@ -112,6 +119,7 @@ public class Reserva {
 
         for (int i = 0; i < Biblioteca.getLista_usuarios().size(); i++) {
             if (Biblioteca.getLista_usuarios().get(i).getTelefono().equals(telefono) && Biblioteca.getLista_usuarios().get(i).getCorreo_electronico().equals(correoElec)) {
+                indexUsuario = Biblioteca.getLista_usuarios().indexOf(Biblioteca.getLista_usuarios().get(i));
                 System.out.println("ISBN del libro");
                 isbn = scanner.nextInt();
             } else {
@@ -132,9 +140,15 @@ public class Reserva {
 
                 Biblioteca.getLista_libros().get(index).setNº_copias_disponibles(Biblioteca.getLista_libros().get(index).getNº_copias_disponibles() + 1);
                 Biblioteca.getLista_libros().get(index).setReserva(false);
-                for (int i = 0; i < Usuario.getLista_reservas().size(); i++) {
-                    if (Usuario.getLista_reservas().get(i).getLibro().getISBN().equals(isbn)) {
-                        Usuario.getLista_reservas().remove(i);
+                for (int i = 0; i < Biblioteca.getLista_reservas_biblioteca().size(); i++) {
+                    if (Biblioteca.getLista_reservas_biblioteca().get(i).getLibro().getISBN().equals(isbn)) {
+                        Biblioteca.getLista_reservas_biblioteca().remove(i);
+                    }
+                }
+
+                for (int y = 0; y < Biblioteca.getLista_usuarios().get(indexUsuario).getLista_reservas().size(); y++) {
+                    if (Biblioteca.getLista_usuarios().get(indexUsuario).getLista_reservas().get(y).getLibro().getISBN().equals(isbn)) {
+                        Biblioteca.getLista_usuarios().get(indexUsuario).getLista_reservas().remove(y);
                     }
                 }
                 System.out.println(Biblioteca.getLista_libros().get(index).toString());
@@ -144,7 +158,7 @@ public class Reserva {
                 System.out.println("Este libro no estaba reservado, no se puede devolver");
             }
 
-        }else {
+        } else {
             System.out.println("Libro no encontrado");
         }
 
@@ -155,9 +169,15 @@ public class Reserva {
     }
 
     public static void mostrarReservas() {
-        for (int i = 0; i < Usuario.getLista_reservas().size(); i++) {
-            System.out.println(Usuario.getLista_reservas().get(i).toString());
+
+        if (Biblioteca.getLista_reservas_biblioteca().isEmpty()) {
+            System.out.println("No hay ninguna resera realizada");
+        } else {
+            for (int i = 0; i < Biblioteca.getLista_reservas_biblioteca().size(); i++) {
+                System.out.println(Biblioteca.getLista_reservas_biblioteca().get(i).toString());
+            }
         }
+
     }
 }
 

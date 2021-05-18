@@ -37,8 +37,10 @@ public class Utils {
     public static void inicializar() {
         Bibliotecario bibliotecario = new Bibliotecario("Admin", "AdminApellido1", "AdminApellido2", 45, "12345678A", "biblioteca", "Jefazo");
         Biblioteca.getBibliotecarios().add(bibliotecario);
-        Usuario primerUsuario = new Usuario("Pepe", "Martínez", "Eastwood", 77, 971674856, "Carrer de la vida", "pepemartinez@", 07567);
+
+        Usuario primerUsuario = new Usuario("Pepe", "Martínez", "Eastwood", 77, 971, "Carrer de la vida", "pepe", 07567);
         Biblioteca.getLista_usuarios().add(primerUsuario);
+
         Libro libro = new Libro(2323, "Padrino", "Mario Puzzo", "Los mejores libros", false);
         Biblioteca.getLista_libros().add(libro);
         Scanner pedir_datos = new Scanner(System.in);
