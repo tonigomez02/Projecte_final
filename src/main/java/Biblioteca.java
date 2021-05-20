@@ -130,7 +130,7 @@ public class Biblioteca {
         }
 
         if (ayuda) {
-            System.out.println("Este usuario ya existe");
+            System.out.println("Este usuario ya existe, no se ha añadido a la base de datos");
         } else {
             getLista_usuarios().add(usuario);
             System.out.println("Usuario registrado correctamente");
@@ -167,15 +167,21 @@ public class Biblioteca {
     }
 
     public void mostrarLibrosDisponibles(){
+        Integer noLibros = 0;
+
         if (Biblioteca.getLista_libros().isEmpty()) {
             System.out.println("Lista vacía, no hay datos que mostrar");
         } else{
             for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
                 if (Biblioteca.getLista_libros().get(i).getNº_copias_disponibles() > 0){
-                    //TODO: SOUT DE LIBROS NO DISPONIBLES
                     System.out.println(Biblioteca.getLista_libros().get(i).toString());
+                }else {
+                    noLibros += 1;
                 }
 
+            }
+            if (noLibros.equals(Biblioteca.getLista_libros().size())){
+                System.out.println("No hay libros disponibles");
             }
         }
     }

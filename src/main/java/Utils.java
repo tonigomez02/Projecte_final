@@ -43,6 +43,7 @@ public class Utils {
 
         Libro libro = new Libro(2323, "Padrino", "Mario Puzzo", "Los mejores libros", false);
         Biblioteca.getLista_libros().add(libro);
+
         Scanner pedir_datos = new Scanner(System.in);
 
         System.out.println("Bienvenido a la biblioteca");

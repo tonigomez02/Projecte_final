@@ -5,13 +5,17 @@ public class Bibliotecario extends Persona {
     private String contraseña;
     private String puesto_de_trabajo;
 
+
     @Override
     public String toString() {
-        return "Bibliotecario{" +
-                "NIF='" + NIF + '\'' +
-                ", contraseña='" + contraseña + '\'' +
-                ", puesto_de_trabajo='" + puesto_de_trabajo + '\'' +
-                '}';
+        return "\n" +
+                "Nombre: " + getNombre() + "\n" +
+                "Primer apellido: " + getApellido1() + "\n" +
+                "Segundo apellido: " + getApeellido2() + "\n" +
+                "Edad: " + getEdad() + "\n" +
+                "NIF: " + NIF + '\n' +
+                "Contraseña: " + contraseña + '\n' +
+                "Puesto de trabajo: " + puesto_de_trabajo + '\n';
     }
 
     public Bibliotecario() {

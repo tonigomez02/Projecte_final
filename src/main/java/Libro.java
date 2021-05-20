@@ -145,7 +145,7 @@ public class Libro {
             }else {
                 Biblioteca.getLista_libros().remove(Biblioteca.getLista_libros().get(index));
                 System.out.println("Libro eliminado de la lista");
-                System.out.println("Lista actualizada");
+                System.out.println("Lista actualizada" + "\n");
                 biblioteca.mostrarLibros();
             }
 

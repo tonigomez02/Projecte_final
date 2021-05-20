@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public abstract class  Persona {
+public abstract class Persona {
 
     private String nombre;
     private String apellido1;
@@ -152,49 +152,53 @@ public abstract class  Persona {
         boolean entradaBibliotecario = false;
         boolean entradaUsuario = false;
 
-        System.out.println("1- Para eliminar bibliotecarios");
-        System.out.println("2- Para eliminar usuarios");
-        Integer opcion = tipoPersonal.nextInt();
+        if (Biblioteca.getBibliotecarioActual().getPuesto_de_trabajo().equals("Admin")) {
+            System.out.println("1- Para eliminar bibliotecarios");
+            System.out.println("2- Para eliminar usuarios");
+            Integer opcion = tipoPersonal.nextInt();
 
 
-        if (opcion.equals(1)) {
-            System.out.println("NIF del bibliotecario");
-            String nif = scanner1.nextLine();
-            for (int i = 0; i < Biblioteca.getBibliotecarios().size(); i++) {
-                if (Biblioteca.getBibliotecarios().get(i).getNIF().equals(nif)) {
-                    index = Biblioteca.getBibliotecarios().indexOf(Biblioteca.getBibliotecarios().get(i));
-                    entradaBibliotecario = true;
+            if (opcion.equals(1)) {
+                System.out.println("NIF del bibliotecario");
+                String nif = scanner1.nextLine();
+                for (int i = 0; i < Biblioteca.getBibliotecarios().size(); i++) {
+                    if (Biblioteca.getBibliotecarios().get(i).getNIF().equals(nif)) {
+                        index = Biblioteca.getBibliotecarios().indexOf(Biblioteca.getBibliotecarios().get(i));
+                        entradaBibliotecario = true;
+                    }
+
+                }
+                if (entradaBibliotecario) {
+                    if (!(Biblioteca.getBibliotecarios().size() == 1)) {
+                        Biblioteca.getBibliotecarios().remove(Biblioteca.getBibliotecarios().get(index));
+                        System.out.println("Bibliotecario elimando correctamente");
+                    } else {
+                        System.out.println("No se pudo eliminar al bibliotecario");
+                    }
+
+                } else {
+                    System.out.println("Bibliotecario no encontrado o credenciales incorrectas");
                 }
 
-            }
-            if (entradaBibliotecario) {
-                if (!(Biblioteca.getBibliotecarios().size() == 1)){
-                    Biblioteca.getBibliotecarios().remove(Biblioteca.getBibliotecarios().get(index));
-                    System.out.println("Bibliotecario elimando correctamente");
-                }else {
-                    System.out.println("No se pudo eliminar al bibliotecario");
+            } else if (opcion.equals(2)) {
+                System.out.println("Correo del usuario");
+                String correoElec = scanner2.nextLine();
+                for (int i = 0; i < Biblioteca.getLista_usuarios().size(); i++) {
+                    if (Biblioteca.getLista_usuarios().get(i).getCorreo_electronico().equals(correoElec)) {
+                        index = Biblioteca.getLista_usuarios().indexOf(Biblioteca.getLista_usuarios().get(i));
+                        entradaUsuario = true;
+                    }
+
                 }
-
-            } else {
-                System.out.println("Bibliotecario no encontrado o credenciales incorrectas");
-            }
-
-        } else if (opcion.equals(2)) {
-            System.out.println("Correo del usuario");
-            String correoElec = scanner2.nextLine();
-            for (int i = 0; i < Biblioteca.getLista_usuarios().size(); i++) {
-                if (Biblioteca.getLista_usuarios().get(i).getCorreo_electronico().equals(correoElec)) {
-                    index = Biblioteca.getLista_usuarios().indexOf(Biblioteca.getLista_usuarios().get(i));
-                    entradaUsuario = true;
+                if (entradaUsuario) {
+                    Biblioteca.getLista_usuarios().remove(Biblioteca.getLista_usuarios().get(index));
+                    System.out.println("Usuario elimando correctamente");
+                } else {
+                    System.out.println("Usuario no encontrado o credenciales incorrectas");
                 }
-
             }
-            if (entradaUsuario) {
-                Biblioteca.getLista_usuarios().remove(Biblioteca.getLista_usuarios().get(index));
-                System.out.println("Usuario elimando correctamente");
-            } else {
-                System.out.println("Usuario no encontrado o credenciales incorrectas");
-            }
+        } else {
+            System.out.println("No está autorizado para realizar esta acción");
         }
 
     }
@@ -260,7 +264,7 @@ public abstract class  Persona {
             String direccion = recogidaDatos.nextLine();
             usuario.setDirección(direccion);
             System.out.println("Codigo postal del usuario:");
-            Integer codiPostal = recogidaDatos.nextInt();
+            Integer codiPostal = Integer.valueOf(recogidaDatos.nextLine());
             usuario.setCodigo_postal(codiPostal);
             System.out.println("Correo electronico del usuario:");
             String codiElec = recogidaDatos.nextLine();
@@ -269,9 +273,9 @@ public abstract class  Persona {
         }
     }
 
-    public static void logInPersona(Integer opcion){
+    public static void logInPersona(Integer opcion) {
 
-        if (opcion.equals(1)){
+        if (opcion.equals(1)) {
 
             Scanner recogidaDatos = new Scanner(System.in);
             Scanner recogidaDatos2 = new Scanner(System.in);
@@ -311,6 +315,7 @@ public abstract class  Persona {
                         } else {
                             System.out.println("Log in completado");
                             Biblioteca.setBibliotecarioActual(Biblioteca.getBibliotecarios().get(index));
+                            System.out.println("Bienvenido a la biblioteca, " + Biblioteca.getBibliotecarioActual().getNombre() + "\n");
                             setSalidaLogInBibliotecario(false);
 
                         }
@@ -321,7 +326,7 @@ public abstract class  Persona {
 
             }
 
-        }else if (opcion.equals(2)){
+        } else if (opcion.equals(2)) {
 
             Scanner recogidaDatos = new Scanner(System.in);
             Scanner recogidaDatos2 = new Scanner(System.in);
@@ -362,6 +367,7 @@ public abstract class  Persona {
                             System.out.println("Log in completado");
                             setSalidaLogInUsuario(false);
                             Biblioteca.setUsuarioActual(Biblioteca.getLista_usuarios().get(index));
+                            System.out.println("Bienvenido a la biblioteca, " + Biblioteca.getUsuarioActual().getNombre() + "\n");
                         }
 
                         break;
