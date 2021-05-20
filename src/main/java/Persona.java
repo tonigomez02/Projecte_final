@@ -230,6 +230,9 @@ public abstract class  Persona {
             System.out.println("Contraseña del bibliotecario:");
             String contraseña = recogidaDatos.nextLine();
             bibliotecario.setContraseña(contraseña);
+            System.out.println("Puesto de trabajo: ");
+            String puestoTrabajo = recogidaDatos.nextLine();
+            bibliotecario.setPuesto_de_trabajo(puestoTrabajo);
             Biblioteca.añadirBibliotecario(bibliotecario);
 
         } else if (opcion.equals(2)) {
@@ -257,7 +260,7 @@ public abstract class  Persona {
             String direccion = recogidaDatos.nextLine();
             usuario.setDirección(direccion);
             System.out.println("Codigo postal del usuario:");
-            Integer codiPostal = Integer.valueOf(recogidaDatos.nextLine());
+            Integer codiPostal = recogidaDatos.nextInt();
             usuario.setCodigo_postal(codiPostal);
             System.out.println("Correo electronico del usuario:");
             String codiElec = recogidaDatos.nextLine();
@@ -307,7 +310,9 @@ public abstract class  Persona {
                             System.out.println("Log in incorrecto");
                         } else {
                             System.out.println("Log in completado");
+                            Biblioteca.setBibliotecarioActual(Biblioteca.getBibliotecarios().get(index));
                             setSalidaLogInBibliotecario(false);
+
                         }
 
                         break;
@@ -322,6 +327,7 @@ public abstract class  Persona {
             Scanner recogidaDatos2 = new Scanner(System.in);
             Integer ayuda = 0;
             Integer output = 0;
+            Integer index = 0;
 
             while (isSalidaLogInUsuario() && ayuda == 0) {
                 System.out.println("1- Para salir");
@@ -344,6 +350,7 @@ public abstract class  Persona {
                         for (int i = 0; i < Biblioteca.getLista_usuarios().size(); i++) {
                             if (Biblioteca.getLista_usuarios().get(i).getCorreo_electronico().equals(correo_elec)
                                     && Biblioteca.getLista_usuarios().get(i).getTelefono().equals(telefono)) {
+                                index = Biblioteca.getLista_usuarios().indexOf(Biblioteca.getLista_usuarios().get(i));
 
                             } else {
                                 ayuda += 1;
@@ -354,6 +361,7 @@ public abstract class  Persona {
                         } else {
                             System.out.println("Log in completado");
                             setSalidaLogInUsuario(false);
+                            Biblioteca.setUsuarioActual(Biblioteca.getLista_usuarios().get(index));
                         }
 
                         break;

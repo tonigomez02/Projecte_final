@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class Main {
@@ -25,7 +26,7 @@ public class Main {
                 Persona.logInPersona(1);
                 if (!Bibliotecario.isSalidaLogInBibliotecario()) {
                     System.out.println("Ha accedido como bibliotecario");
-                    while (opcion != 9) {
+                    while (opcion != 10) {
                         System.out.println("1- Reservar libro");
                         System.out.println("2- Devolver libro");
                         System.out.println("3- Añadir libro");
@@ -34,7 +35,8 @@ public class Main {
                         System.out.println("6- Eliminar personal");
                         System.out.println("7- Mostrar usuarios");
                         System.out.println("8- Mostrar bibliotecarios");
-                        System.out.println("9- Log out");
+                        System.out.println("9- Mostrar reservas");
+                        System.out.println("10 Log out");
                         opcion = teclado.nextInt();
                         retorno = 0;
 
@@ -119,6 +121,15 @@ public class Main {
                                 }
                                 break;
 
+                            case 9:
+
+                                while (retorno != 1) {
+                                    Reserva.mostrarReservas();
+                                    System.out.println("1 - Salir");
+                                    retorno = teclado.nextInt();
+                                }
+                                break;
+
                         }
                     }
                 } else {
@@ -172,7 +183,7 @@ public class Main {
                             case 4:
 
                                 while (retorno != 1) {
-                                    Reserva.mostrarReservas();
+                                    Usuario.mostrarMisReservas();
                                     System.out.println("1 - Salir");
                                     retorno = teclado.nextInt();
                                 }

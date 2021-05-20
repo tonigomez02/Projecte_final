@@ -35,7 +35,7 @@ public class Utils {
     }
 
     public static void inicializar() {
-        Bibliotecario bibliotecario = new Bibliotecario("Admin", "AdminApellido1", "AdminApellido2", 45, "12345678A", "biblioteca", "Jefazo");
+        Bibliotecario bibliotecario = new Bibliotecario("Admin", "AdminApellido1", "AdminApellido2", 45, "12345678A", "biblioteca", "Admin");
         Biblioteca.getBibliotecarios().add(bibliotecario);
 
         Usuario primerUsuario = new Usuario("Pepe", "Martínez", "Eastwood", 77, 971, "Carrer de la vida", "pepe", 07567);

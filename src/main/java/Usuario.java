@@ -23,6 +23,7 @@ public class Usuario extends Persona {
                     "Telefono: " + telefono + "\n" +
                     "Dirección: " + dirección + "\n" +
                     "Codigo postal: " + codigo_postal + "\n" +
+                    "Correo electónico: " + correo_electronico + "\n" +
                     "Lista de reservas: " + lista_reservas + "\n";
         }
     }
@@ -90,6 +91,18 @@ public class Usuario extends Persona {
         } else {
             for (int i = 0; i < Biblioteca.getLista_usuarios().size(); i++) {
                 System.out.println(Biblioteca.getLista_usuarios().get(i).toString());
+            }
+        }
+
+    }
+
+    public static void mostrarMisReservas(){
+
+        if (Biblioteca.getUsuarioActual().getLista_reservas().isEmpty()){
+            System.out.println("No tienes reservas realizadas");
+        }else {
+            for (int i = 0; i < Biblioteca.getUsuarioActual().getLista_reservas().size(); i++) {
+                System.out.println(Biblioteca.getUsuarioActual().getLista_reservas().get(i).toString());
             }
         }
 

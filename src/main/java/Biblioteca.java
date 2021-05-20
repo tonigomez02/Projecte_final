@@ -10,6 +10,8 @@ public class Biblioteca {
     private static List<Bibliotecario> bibliotecarios = new ArrayList<>();
     private  static List<Reserva> lista_reservas_biblioteca = new ArrayList<>();
     private static Integer contador = 1;
+    private static Bibliotecario bibliotecarioActual;
+    private static Usuario usuarioActual;
 
     @Override
     public String toString() {
@@ -83,6 +85,21 @@ public class Biblioteca {
         Biblioteca.lista_reservas_biblioteca = lista_reservas_biblioteca;
     }
 
+    public static Bibliotecario getBibliotecarioActual() {
+        return bibliotecarioActual;
+    }
+
+    public static void setBibliotecarioActual(Bibliotecario bibliotecarioActual) {
+        Biblioteca.bibliotecarioActual = bibliotecarioActual;
+    }
+
+    public static Usuario getUsuarioActual() {
+        return usuarioActual;
+    }
+
+    public static void setUsuarioActual(Usuario usuarioActual) {
+        Biblioteca.usuarioActual = usuarioActual;
+    }
 
     public static void añadirLibro(Libro libro) {
         Integer index = 0;
@@ -154,7 +171,8 @@ public class Biblioteca {
             System.out.println("Lista vacía, no hay datos que mostrar");
         } else{
             for (int i = 0; i < Biblioteca.getLista_libros().size(); i++) {
-                if (!Biblioteca.getLista_libros().get(i).isReserva()){
+                if (Biblioteca.getLista_libros().get(i).getNº_copias_disponibles() > 0){
+                    //TODO: SOUT DE LIBROS NO DISPONIBLES
                     System.out.println(Biblioteca.getLista_libros().get(i).toString());
                 }
 
